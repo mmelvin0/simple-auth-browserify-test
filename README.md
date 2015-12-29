@@ -1,53 +1,32 @@
-# Simple-auth-browserify-test
+# Ember Simple Auth/Browserify Issue Reproduction
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This repo is to reproduce an issue with the Ember-CLI test runner breaking with both ember-browserify (1.1.4) and ember-simple-auth (1.0.1).
 
-## Prerequisites
+To see the issue after cloning this repo:
 
-You will need the following things properly installed on your computer.
+```
+bower install
+npm install
+ember serve
+```
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+To create the issue from scratch (with Ember-CLI 1.13.13):
 
-## Installation
+```
+ember new simple-auth-browerify-test
+cd simple-auth-browerify-test
+ember install ember-browserify
+ember install ember-simple-auth
+ember serve
+```
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+Then visit the test page in your browser. Observe the error:
 
-## Running / Development
-
-* `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
-
+```
+Uncaught Error: Could not find module `undefined` imported from `(require)`
+  missingModule @ loader.js:135
+  findModule @ loader.js:150
+  requireModule @ loader.js:139
+  s @ _prelude.js:1
+  (anonymous function) @ qunit.js:12
+```
